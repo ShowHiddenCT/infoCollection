@@ -2,7 +2,6 @@
 
 #### 1.1 项目结构
 
-
 <table>
     <tr>
         <td>Application.go</td>
@@ -65,6 +64,7 @@
         <td>全部采集的数据，最终生成了json文件</td>
     </tr>
 </table>
+
 #### 1.2采集信息
 
 1.  应用: 软件名、发行者、版本、下载地址
@@ -78,22 +78,21 @@
 9.  进程(Process): 进程名、进程号、占用资源
 10. 后台服务(Service): 服务名称、展示名称、类型、状态、win32退出代码、服务退出代码、监测点等 
 
-#### 1.3 数据结构
-
+#### 1.3、数据格式
+使用的是**嵌套结构体**
 
 ```go
-// 嵌套结构体
 type Windows struct {
-  Application 	[]Application 	`json:"Application"`
-  Cpu     		Cpu      		`json:"Cpu"`
-  Os      		Os       		`json:"Os"`
-  Network   	[]Network   	`json:"Network"`
-  FireWall   	FireWall    	`json:"FireWall"`
-  Disk     		[]Disk     		`json:"Disk"`
-  Memory    	Memory     		`json:"Memory"`
-  Device    	host.InfoStat 	`json:"Device"`
-  Process   	[]Process   	`json:"Process"`
-  Service   	[]Service   	`json:"Service"`
+    Application []Application `json:"Application"`
+    Cpu         Cpu           `json:"Cpu"`
+    Os          Os            `json:"Os"`
+    Network     []Network     `json:"Network"`
+    FireWall    FireWall      `json:"FireWall"`
+    Disk        []Disk        `json:"Disk"`
+    Memory      Memory        `json:"Memory"`
+    Device      host.InfoStat `json:"Device"`
+    Process     []Process     `json:"Process"`
+    Service     []Service     `json:"Service"`
 }
 ```
 
