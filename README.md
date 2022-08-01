@@ -119,9 +119,10 @@ type Application struct {
     Publisher       string `json:"publisher"`
     UninstallString string `json:"uninstallString"`
 }
+```
 
-## 2.4、 CPU采集
-##### 2.4.1 结构体
+#### 2.2、 CPU采集
+##### 结构体
 |参数|说明|
 |---|----|
 |Info|cpu的基本信息|
@@ -140,7 +141,7 @@ type Cpu struct {
 }
 ```
 
-#### 2.2、 Device采集
+#### 2.3、 Device采集
 ##### 结构体
 > Device结构体直接使用的是gopsutil包的host子包中编写好的**InfoStat**结构体
 
@@ -164,7 +165,7 @@ type InfoStat struct {
 }
 ```
 
-#### 2.3、 Disk采集
+#### 2.4、 Disk采集
 
 ##### 结构体
 
@@ -201,7 +202,7 @@ type Disk struct {
 }
 ```
 
-#### 2.4、 FireWall采集
+#### 2.5、 FireWall采集
 ##### 结构体
 > 结构体使用的是嵌套结构体 分为防火墙状态、防火墙规则
 
@@ -274,7 +275,7 @@ type FireWallRules struct {
     Operation     string `json:"Operation"`
 }
 ```
-#### 2.5、 Memory采集
+#### 2.6、 Memory采集
 
 ##### 结构体
 
@@ -298,7 +299,7 @@ type Memory struct {
     PgFault     uint64  `json:"pgfault"`
 }
 ```
-#### 2.6、 Network采集
+#### 2.7、 Network采集
 ##### 结构体
 |参数|说明|
 |---|----|
@@ -316,7 +317,7 @@ type Network struct {
 }
 ```
 
-#### 2.7、 OS采集
+#### 2.8、 OS采集
 ##### 结构体
 |参数|说明|
 |---|----|
@@ -330,7 +331,7 @@ type Os struct {
     OsVersion string `json:"osVersion"`
 }
 ```
-#### 2.8、 Process采集
+#### 2.9、 Process采集
 ##### 结构体
 |参数|说明|
 |---|----|
@@ -345,7 +346,7 @@ type Process struct {
 }
 ```
 
-#### 2.9、 Service采集
+#### 2.10、 Service采集
 ##### 结构体
 |参数|说明|
 |---|----|
