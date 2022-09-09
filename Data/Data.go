@@ -19,6 +19,8 @@ import (
 	Process 		进程信息
 	Service 		服务
 */
+
+// 最终生成的结构体
 type Windows struct {
 	Application []Application `json:"Application"`
 	Cpu         Cpu           `json:"Cpu"`

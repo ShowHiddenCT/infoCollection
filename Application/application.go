@@ -67,6 +67,7 @@ func getApplication(startKey registry.Key, appName []string, path string) []Data
 		if err != nil {
 			continue
 		}
+		// 获取详细的各项信息
 		displayIcon, _, err := kQuery64Details.GetStringValue("DisplayIcon")
 		displayName, v, err := kQuery64Details.GetStringValue("DisplayName")
 		displayVersion, _, err := kQuery64Details.GetStringValue("DisplayVersion")

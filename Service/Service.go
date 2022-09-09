@@ -23,13 +23,18 @@ import (
 
 func GetServiceInfo() []Data.Service {
 	var Services = []Data.Service{}
+	// 使用go语言运行windows命令“Sc query state=all”，获得所有的所有服务信息
 	cmd := exec.Command("Sc", "query", "state=all")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Printf("combined out:\n%s\n", string(out))
 		log.Fatalf("cmd.Run() failed with %s\n", err)
 	}
+
+	// 转换编码
 	var s string = utils.ConvertByte2String(out, utils.Charset("GB18030"))
+
+	// 调整格式，清除空格、换行等字符
 	ServiceArr := strings.Split(s, "SERVICE_NAME:")
 	for i := 1; i < len(ServiceArr); i++ {
 		result := strings.Split(ServiceArr[i], "\n")

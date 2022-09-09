@@ -15,8 +15,11 @@ import (
 */
 
 func GetOSInfo() Data.Os {
+	// 获取版本
 	version, _ := host.KernelVersion()
+	//获取平台信息
 	platform, family, version, _ := host.PlatformInformation()
+	//整合信息
 	os := Data.Os{
 		OsName:    platform,
 		OsType:    family,

@@ -40,8 +40,11 @@ import (
 	Operation 		操作
 */
 func GetFireWallInfo() Data.FireWall {
+	//  获取防火墙状态
 	state := getState()
+	// 获取防火墙规则
 	rules := getRules()
+	// 整合成结构体
 	firewall := Data.FireWall{
 		FireWallState: state,
 		FireWallRules: rules,
@@ -50,13 +53,17 @@ func GetFireWallInfo() Data.FireWall {
 }
 
 func getState() Data.FireWallState {
+
+	// 用go语言运行windows命令，展示防火墙状态信息
 	cmd := exec.Command("netsh", "firewall", "show", "state")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Printf("combined out:\n%s\n", string(out))
 		log.Fatalf("cmd.Run() failed with %s\n", err)
 	}
+	// 修改编码，防止乱码
 	var s string = utils.ConvertByte2String(out, utils.Charset("GB18030"))
+	// 调整获取的信息格式，因为是运行windows命令得到的信息，基本表格格式，下面的代码主要是清除换行、空格的字符，获得需要的数据。
 	countSplit := strings.Split(s, "\r\n")
 	tempstr := []string{}
 	for i := 3; i < 10; i++ {
@@ -80,18 +87,28 @@ func getState() Data.FireWallState {
 }
 
 func getRules() []Data.FireWallRules {
+	/*
+		获取防火墙规则信息
+		和上面获取防火墙状态的思路一致
+		1. 用go语言运行windows命令，获取防火墙规则信息。
+		2. 转换编码，防止乱码
+		3. 调整格式，因为输出的格式基本为表格，需要清除多余的换行、空格等字符
+	*/
 	var rules []Data.FireWallRules
 	var Rule Data.FireWallRules
+	// 运行windows命令
 	cmd := exec.Command("netsh", "advfirewall", "firewall", "show", "rule", "name=all")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Printf("combined out:\n%s\n", string(out))
 		log.Fatalf("cmd.Run() failed with %s\n", err)
 	}
+
+	// 修改编码
 	var s string = utils.ConvertByte2String(out, utils.Charset("GB18030"))
 
+	// 调整格式
 	countSplit := strings.Split(s, "规则名称:")
-
 	for i := 1; i < len(countSplit); i++ {
 		result := strings.Split(countSplit[i], "\n")
 		result[0] = strings.Replace(result[0], " ", "", -1)

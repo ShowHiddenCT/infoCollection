@@ -16,6 +16,7 @@ import (
 	PgFault 	缺页错误数
 */
 func GetMemInfo() Data.Memory {
+	// 获取内存信息
 	swapMemory, _ := mem.SwapMemory()
 	mem := Data.Memory{}
 	mem.Total = swapMemory.Total

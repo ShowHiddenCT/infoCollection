@@ -36,7 +36,7 @@ func GetOSInfo() Data.Cpu {
 	*/
 	cpuTime, _ := cpu.Times(true)
 
-	// 整合成结构体，返回main函数
+	// 整合成结构体，返回信息给main函数
 	cpu := Data.Cpu{
 		Info:          cpuInfos,
 		LogicalCount:  cpuLogicalCount,

@@ -22,9 +22,11 @@ import (
 	Label
 */
 func GetDiskInfo() []Data.Disk {
+	// 获取磁盘信息
 	mapStat, _ := disk.IOCounters()
 	var mems = []Data.Disk{}
 	var mem = Data.Disk{}
+	// 循环读取各项信息
 	for _, stat := range mapStat {
 		mem.Name = stat.Name
 		mem.ReadCount = stat.ReadCount
